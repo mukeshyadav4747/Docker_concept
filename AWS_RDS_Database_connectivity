@@ -1,0 +1,116 @@
+#AWS RDS introduction ---->
+
+
+#Task youu have to host a website on ec2-server that is attached a database (RDS).
+
+#Go to AWS ---> Search 'RDS ---> In the left side we will see 'Databases' click on it -->
+
+#Templates('Free Tier') ---->
+
+#credentials management select'Self-managed'
+
+#---> Master password('abcd12345') ---> configure master password('abcd12345') ---> In Storage autoscaling please deselect of 'Enable storage autoscaling'.
+
+#Connectivity('Don't Connect to an EC2 compute resource') --> Public access ('Yes') --> VPS('create new') --> New vpc security group name('Mysql SG')---> Availability zone('No perference')----> click on 'Add new tag' ---> key('ENV') Value('UAT')---> Database authentication ('Password authentication)---> Now click on 'create database'. ----> Suggested add-ons for database-1('close').
+
+###Output ---> Database is creating
+
+
+#
+
+#step-2 Now we will create ec2-server.
+
+#Go to AWS ---> Search 'EC2' ---> In the left side we will see Launch Instance' -->
+
+#Name('node-app')
+
+#Network (ALLOW Http)
+
+#click on Launch Instance.
+
+#open ec2 instance cli
+
+#sudo yum install docker-y
+
+# sudo systemctl start docker
+#sudo service docker start
+#sudo usermod -aG docker ec2-user
+# sudo docker pull philippaul/node-mysql-app: 02
+#sudo docker images
+
+
+### docker run --rm-p 80:3000
+
+#### -e DB_HOST="your-db-hostname"
+####-e DB_USER="your-db-username"
+#### - DB_PASSWORD="your-db-password"
+##### -d philippaul/node-mysql-app:02
+
+# docker run -it-rm mysql:8.0 mysql -h db.example.com -u admin -p
+
+
+
+# Aur yha per jo by-default rule h usme Source('Anywhere') kr denge--> click on 'save'
+
+# Aur ishi k sath vha (database-1) me hi 'Security' vala option h jha 'VPC security groups' ka link h usko click # Ab hm RDS me databases per jaynge jha hmara 'database-1' bna hua h vha s 'Endpoint' coopy kr lenge aur niche va
+
+# Ab y commands hm ec2 k cli per dalenge.
+
+
+
+#sudo docker run --rm -p 80:3000 \
+# -e DB_HOST="database-1.cxs80e@mk1mm.ap-south-1.rds.amazonaws.com" \  (this end point of rds)
+# -e DB_USER="admin" \
+# -e DB_PASSWORD="abcd12345" \
+# -d philippaul/node-mysql-app:02
+
+# sudo docker ps
+
+# Now copy the public IP of oour ec2-server and paste it on a new tab or broowser and we will see Application is open here
+
+# http://<paste_your_public_ip>
+
+60
+
+61
+
+# Ah kuch bhi random emails daal kr hm usko add kr skte haur jb hm 'show all contacts' ko click krenge to hme all emails show krenge.
+
+###Ab agr hme hmari application me koi sql ki query check krni ho to uske liy hm ec2 server k cli per jaynge aur y command run kr denge
+
+#sudo docker run -it-rm mysql:8.0 mysql -h <paste your hostname url here> -u admin -p
+
+# sudo docker run -it-rm mysql:8.0 mysql -h "database-1.cxs80e0mk1mm.ap-south-1.rds.amazonaws.com"(this end point of rds) -u admin -p
+
+#when you click enter then it will show you
+# Enter password : your password
+### output ---> Welcome to mysql monitor.
+
+#show databases;
+# use my_app_db;
+#show tables;
+# select * from contacts;
+
+# If you have no table or no database then you will use these steps:
+
+81
+
+# mysql -h <your-rds-endpoint> -u admin -p
+
+# Enter password: abcd12345
+
+# create database my_app_db;
+# use my_app_db;
+#CREATE TABLE contacts (
+#   id INT AUTO_INCREMENT PRIMARY KEY,
+#   email VARCHAR(255) NOT NULL
+# );
+
+# INSERT INTO contacts (email) VALUES 
+# ('email1@example.com'),
+# ('email2@example.com);
+
+# SELECT * FROM contacts;
+
+# Now firstly stop container and then run the docker container again.
+# sudo docker stop $(sudo docker ps -q)

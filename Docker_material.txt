@@ -1,0 +1,44 @@
+#Now open the docker desktop for start linux engine
+
+#and on vs code terminal write "docker build-t welcome-app
+
+#Now open the terminal and write
+
+#docker images
+
+#docker run -p 5000:5000 welcome-app
+
+# docker ps #
+
+## this will show how many containers are running
+
+#docker stop container-Id ere for stopping the container
+
+#docker images
+
+### Now we will push our image to docker hub, so far this we have to write commane
+
+#docker login
+
+# docker image re -f image name
+
+#this command will untag that perticular image
+ 
+# docker build -t saurabhbrd/welcome-app.
+
+### this command will create image
+
+# docker push saurabhbrd/welcome-app:latest
+
+# docker tag saurabhbrd/welcome-app saurabhbrd/welcome-app1
+
+### using this command we can
+
+# docker image rm if saurabhbrd/welcome-app3:latest
+
+
+# docker pull saurabhbrd/welcome-app3: latest
+
+### this command will pull the image
+
+# docker run -d -p 5000:5000 saurabhbrd/welcome-app:latest
